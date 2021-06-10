@@ -4,6 +4,9 @@
 (setq whitespace-file "~/.emacs_files/whitespace.el")
 (load whitespace-file)
 
+(setq skeleton-file "~/.emacs_files/skeleton.el")
+(load skeleton-file)
+
 (package-initialize)
 
 ;; show matching parens
@@ -148,8 +151,32 @@
 
 ;; auto-completion
 (ac-config-default)
-(yas-global-mode 1)
+;; (yas-global-mode 1)
 
 ;; whitespace
 (autoload 'nuke-trailing-whitespace "whitespace" nil t)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
+
+;; Makefile auto
+(global-set-key (kbd "C-x C-m") 'create-makefile)
+
+;; .h auto
+(global-set-key (kbd "C-x C-l") 'insert-h-header)
+
+;; Launch the man
+(defun vectra-man-on-word ()
+  "Appelle le man sur le mot pointe par le curseur"
+  (interactive)
+  (manual-entry (current-word)))
+(global-set-key (kbd "C-x C-m") 'vectra-man-on-word)
+
+;; Supprime les fichier ~
+(setq make-backup-files nil)
+
+;; Reduit la fontion sur elle meme
+(add-hook 'c-mode-common-hook 'hs-minor-mode)
+(add-hook 'lisp-mode-hook 'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
+(add-hook 'python-mode-hook 'hs-minor-mode)
+(global-set-key (kbd "<f2>") 'hs-hide-block)
+(global-set-key (kbd "<f3>") 'hs-show-block)
