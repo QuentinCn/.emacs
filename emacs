@@ -158,7 +158,7 @@
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
 ;; Makefile auto
-(global-set-key (kbd "C-x C-m") 'create-makefile)
+(global-set-key (kbd "C-x C-k") 'create-makefile)
 
 ;; .h auto
 (global-set-key (kbd "C-x C-l") 'insert-h-header)
